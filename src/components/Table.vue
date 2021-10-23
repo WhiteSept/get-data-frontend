@@ -9,6 +9,9 @@
         name: 'BetTable',
         props: {
             matches: Object,
+        },
+        setup(){
+
         }
     }
 </script>

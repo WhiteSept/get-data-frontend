@@ -8,20 +8,21 @@
 
 <script>
     import BetTable from './components/Table.vue'
+    import {getMatches} from './services/httpService.js'
 
     export default {
         name: 'App',
         components: {
             BetTable
         },
-        data() {
+        setup() {
+            function fetchMatches() {
+                getMatches()
+            }
+
             return {
                 matches: Object,
-            }
-        },
-        methods: {
-            async fetchMatches() {
-                this.matches = await this.$http.get('http://localhost:8080/api/league');
+                fetchMatches
             }
         }
     }
