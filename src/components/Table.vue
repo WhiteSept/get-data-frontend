@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1></h1>
+        <h1>{{matches}}</h1>
     </div>
 </template>
 
@@ -9,9 +9,6 @@
         name: 'BetTable',
         props: {
             matches: Object,
-        },
-        setup(){
-
         }
     }
 </script>

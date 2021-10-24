@@ -1,27 +1,35 @@
 <template>
     <div>
         <img alt="Vue logo" src="./assets/logo.png">
-        <button @click="fetchMatches" style="width: 100px;height: 100px">Nyomj meg</button>
-        <BetTable :matches="matches"/>
+        <button @click="this.fetchMatches" style="width: 100px;height: 100px">Nyomj meg</button>
+        <BetTable :matches="this.matches"/>
     </div>
 </template>
 
 <script>
     import BetTable from './components/Table.vue'
-    import {getMatches} from './services/httpService.js'
+    import {getMatches} from './services/httpService.ts'
+    import {ref} from 'vue';
 
     export default {
         name: 'App',
         components: {
             BetTable
         },
-        setup() {
-            function fetchMatches() {
-                getMatches()
+        setup: () => {
+            let matches = ref({});
+
+            async function fetchMatches() {
+                const [error, data] = await getMatches();
+                if (error) console.log(error);
+                else {
+                    console.log(this.matches)
+                    this.matches = data;
+                }
             }
 
             return {
-                matches: Object,
+                matches,
                 fetchMatches
             }
         }
